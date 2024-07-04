@@ -179,6 +179,26 @@ func WithLogger(logger async_config.Logger) AsyncOption {
 	})
 }
 
+func WithRunMaxConcurrency(max int) AsyncOption {
+	return asyncOptionFunc(func(cfg config.Config) (config.Config, error) {
+		if max <= 0 {
+			return cfg, errors.New("invalid run max concurrency")
+		}
+		cfg.RunMaxConcurrency = max
+		return cfg, nil
+	})
+}
+
+func WithRunTaskIntervalSecond(interval int) AsyncOption {
+	return asyncOptionFunc(func(cfg config.Config) (config.Config, error) {
+		if interval <= 0 {
+			return cfg, errors.New("invalid run task interval")
+		}
+		cfg.RunTaskInterval = interval
+		return cfg, nil
+	})
+}
+
 func WithPendingRunQueue(pendingRun async_component.IQueue) AsyncOption {
 	return asyncOptionFunc(func(cfg config.Config) (config.Config, error) {
 		if pendingRun != nil {
