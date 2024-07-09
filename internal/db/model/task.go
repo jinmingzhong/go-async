@@ -23,5 +23,5 @@ type AsyncTask struct {
 	// 结束时间戳（finished/failed）
 	DoneAt int64 `gorm:"not null"`
 	// 序列化上下文
-	Ctx string `gorm:"not null"`
+	Ctx string `gorm:"type:longtext;not null"`
 }
